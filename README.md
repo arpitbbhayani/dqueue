@@ -1,4 +1,4 @@
-# DQueue
+# Dqueue
 
 Persistent and fault tolerant queue implementation
 
