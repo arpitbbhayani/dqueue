@@ -2,8 +2,23 @@ package server
 
 import (
 	"encoding/json"
+	"io"
+	"io/ioutil"
 	"net/http"
+
+	"github.com/arpitbbhayani/dqueue/dqueue"
 )
+
+func readHTTPRequestBody(reader io.Reader, obj interface{}) {
+	b, err := ioutil.ReadAll(reader)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(b, obj)
+	if err != nil {
+		panic(err)
+	}
+}
 
 func sendHTTPJSONResponse(obj interface{}, code int, w http.ResponseWriter) {
 	w.Header().Add("Content-Type", "application/json")
@@ -12,23 +27,28 @@ func sendHTTPJSONResponse(obj interface{}, code int, w http.ResponseWriter) {
 		w.WriteHeader(http.StatusInternalServerError)
 		panic(err)
 	}
+	w.WriteHeader(code)
 	_, err = w.Write(response)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		panic(err)
 	}
-	w.WriteHeader(code)
 }
 
 func VersionHandler(w http.ResponseWriter, r *http.Request) {
-	sendHTTPJSONResponse(VersionResponse{
+	sendHTTPJSONResponse(HTTPVersionResponse{
 		Version: "1.0.0",
 	}, http.StatusOK, w)
 }
 
 func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "POST":
+	case "PUT":
+		var request HTTPMessagePutRequest
+		readHTTPRequestBody(r.Body, &request)
+		dq := dqueue.GetInstance()
+		response := dq.PutMessage(request.ToDqueueMessagePutRequest())
+		sendHTTPJSONResponse(response, http.StatusOK, w)
 	default:
 		sendHTTPJSONResponse(HTTPError{
 			Message: "method not allowed",

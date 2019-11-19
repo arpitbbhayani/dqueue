@@ -23,7 +23,7 @@ func runHttpServer(wg *sync.WaitGroup) {
 
 func Run() {
 	var wg sync.WaitGroup
-	dqueue.Initialize()
+	_ = dqueue.GetInstance()
 
 	wg.Add(1)
 	go runHttpServer(&wg)
