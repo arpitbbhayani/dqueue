@@ -1,9 +1,9 @@
 package dqueue
 
 type PutMessageRequest struct {
-	Message string
+	Message *string
 }
 
 type PutMessageResponse struct {
-	ID string
+	ID *string
 }

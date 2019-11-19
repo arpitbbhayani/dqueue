@@ -20,7 +20,7 @@ type HTTPMessagePutRequest struct {
 
 func (r *HTTPMessagePutRequest) ToDqueueMessagePutRequest() *dqueue.PutMessageRequest {
 	return &dqueue.PutMessageRequest{
-		Message: r.Message,
+		Message: &r.Message,
 	}
 }
 

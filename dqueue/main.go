@@ -9,7 +9,7 @@ var (
 type Dqueue struct{}
 
 func initialize() {
-	fmt.Println("initializing queue", dq)
+	fmt.Println("initializing queue ...")
 }
 
 func GetInstance() *Dqueue {
@@ -21,7 +21,8 @@ func GetInstance() *Dqueue {
 }
 
 func (q *Dqueue) PutMessage(req *PutMessageRequest) *PutMessageResponse {
+	id := "1"
 	return &PutMessageResponse{
-		ID: "1",
+		ID: &id,
 	}
 }
