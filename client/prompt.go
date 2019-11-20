@@ -1,8 +1,11 @@
 package client
 
 import (
+	"fmt"
 	"os"
+	"strings"
 
+	"github.com/arpitbbhayani/dqueue/models"
 	"github.com/c-bata/go-prompt"
 )
 
@@ -12,7 +15,9 @@ func executor(in string) {
 	case "exit":
 		os.Exit(0)
 	case "put":
-		// message := strings.Join(tokens[1:], " ")
+		fmt.Println(dqclient.PutMessage(&models.PutMessageRequest{
+			Message: strings.Join(tokens[1:], " "),
+		}).ToString())
 	}
 }
 

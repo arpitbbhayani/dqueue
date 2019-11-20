@@ -16,7 +16,9 @@ var (
 func initDqueueClient(protocol string) {
 	switch protocol {
 	case "http":
-		dqclient = DqueueHTTPClient{}
+		dqclient = DqueueHTTPClient{
+			URL: "http://localhost:4000",
+		}
 	default:
 		panic("invalid protocol. allowed protocol: http")
 	}

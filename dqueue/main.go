@@ -27,6 +27,6 @@ func GetInstance() *Dqueue {
 func (q *Dqueue) PutMessage(req *models.PutMessageRequest) *models.PutMessageResponse {
 	id := "1"
 	return &models.PutMessageResponse{
-		ID: &id,
+		ID: id,
 	}
 }
