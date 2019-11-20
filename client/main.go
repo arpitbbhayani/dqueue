@@ -5,13 +5,8 @@ import (
 	"github.com/c-bata/go-prompt"
 )
 
-type DqueueClient interface {
-	PutMessage(*models.PutMessageRequest) *models.PutMessageResponse
-	GetMessage(*models.GetMessageRequest) *models.GetMessageResponse
-}
-
 var (
-	dqclient DqueueClient
+	dqclient models.DqueueClient
 )
 
 func initDqueueClient(protocol string) {
