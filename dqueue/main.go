@@ -30,3 +30,11 @@ func (q *Dqueue) PutMessage(req *models.PutMessageRequest) *models.PutMessageRes
 		ID: id,
 	}
 }
+
+func (q *Dqueue) GetMessage(req *models.GetMessageRequest) *models.GetMessageResponse {
+	id := "1"
+	return &models.GetMessageResponse{
+		ID:      id,
+		Message: "message-dummy",
+	}
+}

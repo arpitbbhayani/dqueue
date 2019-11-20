@@ -18,13 +18,15 @@ func executor(in string) {
 		fmt.Println(dqclient.PutMessage(&models.PutMessageRequest{
 			Message: strings.Join(tokens[1:], " "),
 		}).ToString())
+	case "get":
+		fmt.Println(dqclient.GetMessage(&models.GetMessageRequest{}).ToString())
 	}
 }
 
 func completer(d prompt.Document) []prompt.Suggest {
 	commandSuggests := []prompt.Suggest{
 		{Text: "put", Description: "puts a message to the queue"},
-		{Text: "peek", Description: "peeks the message from the front of the queue"},
+		{Text: "get", Description: "gets a message from the queue"},
 		{Text: "exit", Description: "exits the client"},
 	}
 

@@ -7,6 +7,7 @@ import (
 
 type DqueueClient interface {
 	PutMessage(*models.PutMessageRequest) *models.PutMessageResponse
+	GetMessage(*models.GetMessageRequest) *models.GetMessageResponse
 }
 
 var (

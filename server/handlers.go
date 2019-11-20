@@ -50,6 +50,11 @@ func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 		dq := dqueue.GetInstance()
 		response := dq.PutMessage(&request)
 		sendHTTPJSONResponse(response, http.StatusOK, w)
+	case "GET":
+		var request models.GetMessageRequest
+		dq := dqueue.GetInstance()
+		response := dq.GetMessage(&request)
+		sendHTTPJSONResponse(response, http.StatusOK, w)
 	default:
 		sendHTTPJSONResponse(models.HTTPError{
 			Message: "method not allowed",
