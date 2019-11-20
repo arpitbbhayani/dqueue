@@ -1,6 +1,10 @@
 package dqueue
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/arpitbbhayani/dqueue/models"
+)
 
 var (
 	dq *Dqueue
@@ -20,9 +24,9 @@ func GetInstance() *Dqueue {
 	return dq
 }
 
-func (q *Dqueue) PutMessage(req *PutMessageRequest) *PutMessageResponse {
+func (q *Dqueue) PutMessage(req *models.PutMessageRequest) *models.PutMessageResponse {
 	id := "1"
-	return &PutMessageResponse{
+	return &models.PutMessageResponse{
 		ID: &id,
 	}
 }

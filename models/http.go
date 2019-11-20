@@ -1,8 +1,4 @@
-package server
-
-import (
-	"github.com/arpitbbhayani/dqueue/dqueue"
-)
+package models
 
 type HTTPError struct {
 	Message string
@@ -18,8 +14,8 @@ type HTTPMessagePutRequest struct {
 	Message string `json:"message"`
 }
 
-func (r *HTTPMessagePutRequest) ToDqueueMessagePutRequest() *dqueue.PutMessageRequest {
-	return &dqueue.PutMessageRequest{
+func (r *HTTPMessagePutRequest) ToDqueueMessagePutRequest() *PutMessageRequest {
+	return &PutMessageRequest{
 		Message: &r.Message,
 	}
 }

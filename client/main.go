@@ -20,6 +20,8 @@ func executor(in string) {
 	switch tokens[0] {
 	case "exit":
 		os.Exit(0)
+	case "put":
+		_ = strings.Join(tokens[1:], " ")
 	}
 }
 

@@ -1,4 +1,4 @@
-package dqueue
+package models
 
 type PutMessageRequest struct {
 	Message *string

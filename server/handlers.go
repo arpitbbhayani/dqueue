@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/arpitbbhayani/dqueue/dqueue"
+	"github.com/arpitbbhayani/dqueue/models"
 )
 
 func readHTTPRequestBody(reader io.Reader, obj interface{}) {
@@ -36,7 +37,7 @@ func sendHTTPJSONResponse(obj interface{}, code int, w http.ResponseWriter) {
 }
 
 func VersionHandler(w http.ResponseWriter, r *http.Request) {
-	sendHTTPJSONResponse(HTTPVersionResponse{
+	sendHTTPJSONResponse(models.HTTPVersionResponse{
 		Version: "1.0.0",
 	}, http.StatusOK, w)
 }
@@ -44,13 +45,13 @@ func VersionHandler(w http.ResponseWriter, r *http.Request) {
 func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "PUT":
-		var request HTTPMessagePutRequest
+		var request models.HTTPMessagePutRequest
 		readHTTPRequestBody(r.Body, &request)
 		dq := dqueue.GetInstance()
 		response := dq.PutMessage(request.ToDqueueMessagePutRequest())
 		sendHTTPJSONResponse(response, http.StatusOK, w)
 	default:
-		sendHTTPJSONResponse(HTTPError{
+		sendHTTPJSONResponse(models.HTTPError{
 			Message: "method not allowed",
 		}, http.StatusMethodNotAllowed, w)
 	}
