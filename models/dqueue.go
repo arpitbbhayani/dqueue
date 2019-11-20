@@ -26,3 +26,14 @@ type GetVersionResponse struct {
 func (x GetVersionResponse) ToString() string {
 	return toJSONString(x)
 }
+
+type GetMessageResponse struct {
+	ID      string `json:"id"`
+	Message string `json:"message"`
+}
+
+func (x GetMessageResponse) ToString() string {
+	return toJSONString(x)
+}
+
+type GetMessageRequest struct{}
