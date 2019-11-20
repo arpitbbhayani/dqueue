@@ -18,5 +18,7 @@ func Execute() error {
 
 func init() {
 	rootCmd.AddCommand(serverCmd)
+
+	clientCmd.Flags().String("protocol", "http", "which protocol to be used for communication")
 	rootCmd.AddCommand(clientCmd)
 }

@@ -4,6 +4,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"github.com/arpitbbhayani/dqueue/models"
 )
 
 const URL = "http://localhost:4000"
@@ -23,4 +25,12 @@ func doPut(url string, payload string) []byte {
 		}
 		return contents
 	}
+}
+
+type DqueueHTTPClient struct {
+	URL string
+}
+
+func (q DqueueHTTPClient) PutMessage(*models.PutMessageRequest) *models.PutMessageResponse {
+	return nil
 }

@@ -1,9 +1,13 @@
 package models
 
 type PutMessageRequest struct {
-	Message *string
+	Message *string `json:"message"`
 }
 
 type PutMessageResponse struct {
-	ID *string
+	ID *string `json:"id"`
+}
+
+type GetVersionResponse struct {
+	Version string `json:"version"`
 }

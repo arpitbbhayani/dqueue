@@ -37,7 +37,7 @@ func sendHTTPJSONResponse(obj interface{}, code int, w http.ResponseWriter) {
 }
 
 func VersionHandler(w http.ResponseWriter, r *http.Request) {
-	sendHTTPJSONResponse(models.HTTPVersionResponse{
+	sendHTTPJSONResponse(models.GetVersionResponse{
 		Version: "1.0.0",
 	}, http.StatusOK, w)
 }
@@ -45,10 +45,10 @@ func VersionHandler(w http.ResponseWriter, r *http.Request) {
 func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "PUT":
-		var request models.HTTPMessagePutRequest
+		var request models.PutMessageRequest
 		readHTTPRequestBody(r.Body, &request)
 		dq := dqueue.GetInstance()
-		response := dq.PutMessage(request.ToDqueueMessagePutRequest())
+		response := dq.PutMessage(&request)
 		sendHTTPJSONResponse(response, http.StatusOK, w)
 	default:
 		sendHTTPJSONResponse(models.HTTPError{

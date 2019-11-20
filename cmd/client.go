@@ -9,6 +9,7 @@ var clientCmd = &cobra.Command{
 	Use:   "client",
 	Short: "Run dqueue client",
 	Run: func(cmd *cobra.Command, args []string) {
-		client.Run()
+		protocol, _ := cmd.Flags().GetString("protocol")
+		client.Run(protocol)
 	},
 }

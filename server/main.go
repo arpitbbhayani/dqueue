@@ -18,7 +18,10 @@ func runHttpServer(wg *sync.WaitGroup) {
 	http.Handle("/", r)
 
 	fmt.Println("Listening to :4000")
-	http.ListenAndServe(":4000", nil)
+	err := http.ListenAndServe(":4000", nil)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func Run() {
@@ -26,7 +29,7 @@ func Run() {
 	_ = dqueue.GetInstance()
 
 	wg.Add(1)
-	go runHttpServer(&wg)
+	runHttpServer(&wg)
 
 	wg.Wait()
 }
