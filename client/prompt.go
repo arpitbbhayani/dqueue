@@ -1,12 +1,12 @@
 package client
 
 import (
-	"fmt"
 	"os"
 	"strings"
 
 	"github.com/arpitbbhayani/dqueue/models"
 	"github.com/c-bata/go-prompt"
+	"github.com/sirupsen/logrus"
 )
 
 func executor(in string) {
@@ -19,17 +19,17 @@ func executor(in string) {
 			Message: strings.Join(tokens[1:], " "),
 		})
 		if err != nil {
-			fmt.Printf("error: %s", err)
+			logrus.Errorf("error: %s", err)
 			return
 		}
-		fmt.Println(r.ToString())
+		logrus.Info(r.ToString())
 	case "get":
 		r, err := dqclient.GetMessage(&models.GetMessageRequest{})
 		if err != nil {
-			fmt.Printf("error: %s", err)
+			logrus.Errorf("error: %s", err)
 			return
 		}
-		fmt.Println(r.ToString())
+		logrus.Info(r.ToString())
 	}
 }
 

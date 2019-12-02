@@ -1,8 +1,6 @@
 package dqueue
 
 import (
-	"fmt"
-
 	"github.com/arpitbbhayani/dqueue/models"
 )
 
@@ -13,7 +11,6 @@ var (
 type Dqueue struct{}
 
 func initialize() {
-	fmt.Println("initializing queue ...")
 }
 
 func GetInstance() *Dqueue {

@@ -1,12 +1,12 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 	"sync"
 
 	"github.com/arpitbbhayani/dqueue/dqueue"
 	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 )
 
 func runHttpServer(wg *sync.WaitGroup) {
@@ -17,7 +17,7 @@ func runHttpServer(wg *sync.WaitGroup) {
 	r.HandleFunc("/msg", MessagesHandler)
 	http.Handle("/", r)
 
-	fmt.Println("Listening to :4000")
+	logrus.Info("Dqueue started on port 4000")
 	if err := http.ListenAndServe(":4000", nil); err != nil {
 		panic(err)
 	}
