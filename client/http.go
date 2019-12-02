@@ -18,7 +18,11 @@ func (q DqueueHTTPClient) PutMessage(request *models.PutMessageRequest) *models.
 	if err != nil {
 		panic(err)
 	}
-	err = json.Unmarshal(doPut(url, payload), &response)
+	b, err := doPut(url, payload)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(b, &response)
 	if err != nil {
 		panic(err)
 	}
@@ -28,7 +32,11 @@ func (q DqueueHTTPClient) PutMessage(request *models.PutMessageRequest) *models.
 func (q DqueueHTTPClient) GetMessage(request *models.GetMessageRequest) *models.GetMessageResponse {
 	var response models.GetMessageResponse
 	url := fmt.Sprintf("%s/msg", q.URL)
-	err := json.Unmarshal(doGet(url), &response)
+	b, err := doGet(url)
+	if err != nil {
+		panic(err)
+	}
+	err = json.Unmarshal(b, &response)
 	if err != nil {
 		panic(err)
 	}
