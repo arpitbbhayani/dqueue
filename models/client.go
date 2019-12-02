@@ -1,6 +1,6 @@
 package models
 
 type DqueueClient interface {
-	PutMessage(*PutMessageRequest) *PutMessageResponse
-	GetMessage(*GetMessageRequest) *GetMessageResponse
+	PutMessage(*PutMessageRequest) (*PutMessageResponse, error)
+	GetMessage(*GetMessageRequest) (*GetMessageResponse, error)
 }

@@ -10,30 +10,32 @@ import (
 	"github.com/arpitbbhayani/dqueue/models"
 )
 
-func readHTTPRequestBody(reader io.Reader, obj interface{}) {
+func readHTTPRequestBody(reader io.Reader, obj interface{}) error {
 	b, err := ioutil.ReadAll(reader)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = json.Unmarshal(b, obj)
 	if err != nil {
-		panic(err)
+		return err
 	}
+	return nil
 }
 
-func sendHTTPJSONResponse(obj interface{}, code int, w http.ResponseWriter) {
+func sendHTTPJSONResponse(obj interface{}, code int, w http.ResponseWriter) error {
 	w.Header().Add("Content-Type", "application/json")
 	response, err := json.Marshal(obj)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		panic(err)
+		return err
 	}
 	w.WriteHeader(code)
 	_, err = w.Write(response)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		panic(err)
+		return err
 	}
+	return nil
 }
 
 func VersionHandler(w http.ResponseWriter, r *http.Request) {
@@ -46,18 +48,27 @@ func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "PUT":
 		var request models.PutMessageRequest
-		readHTTPRequestBody(r.Body, &request)
+		if err := readHTTPRequestBody(r.Body, &request); err != nil {
+			panic(err)
+		}
+
 		dq := dqueue.GetInstance()
 		response := dq.PutMessage(&request)
-		sendHTTPJSONResponse(response, http.StatusOK, w)
+		if err := sendHTTPJSONResponse(response, http.StatusOK, w); err != nil {
+			panic(err)
+		}
 	case "GET":
 		var request models.GetMessageRequest
 		dq := dqueue.GetInstance()
 		response := dq.GetMessage(&request)
-		sendHTTPJSONResponse(response, http.StatusOK, w)
+		if err := sendHTTPJSONResponse(response, http.StatusOK, w); err != nil {
+			panic(err)
+		}
 	default:
-		sendHTTPJSONResponse(models.HTTPError{
+		if err := sendHTTPJSONResponse(models.HTTPError{
 			Message: "method not allowed",
-		}, http.StatusMethodNotAllowed, w)
+		}, http.StatusMethodNotAllowed, w); err != nil {
+			panic(err)
+		}
 	}
 }

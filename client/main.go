@@ -16,7 +16,7 @@ func initDqueueClient(protocol string) {
 			URL: "http://localhost:4000",
 		}
 	default:
-		panic("invalid protocol. allowed protocol: http")
+		return
 	}
 }
 

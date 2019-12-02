@@ -15,11 +15,21 @@ func executor(in string) {
 	case "exit":
 		os.Exit(0)
 	case "put":
-		fmt.Println(dqclient.PutMessage(&models.PutMessageRequest{
+		r, err := dqclient.PutMessage(&models.PutMessageRequest{
 			Message: strings.Join(tokens[1:], " "),
-		}).ToString())
+		})
+		if err != nil {
+			fmt.Printf("error: %s", err)
+			return
+		}
+		fmt.Println(r.ToString())
 	case "get":
-		fmt.Println(dqclient.GetMessage(&models.GetMessageRequest{}).ToString())
+		r, err := dqclient.GetMessage(&models.GetMessageRequest{})
+		if err != nil {
+			fmt.Printf("error: %s", err)
+			return
+		}
+		fmt.Println(r.ToString())
 	}
 }
 

@@ -18,8 +18,7 @@ func runHttpServer(wg *sync.WaitGroup) {
 	http.Handle("/", r)
 
 	fmt.Println("Listening to :4000")
-	err := http.ListenAndServe(":4000", nil)
-	if err != nil {
+	if err := http.ListenAndServe(":4000", nil); err != nil {
 		panic(err)
 	}
 }
