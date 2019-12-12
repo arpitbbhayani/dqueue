@@ -26,8 +26,13 @@ func runHttpServer(wg *sync.WaitGroup) {
 	}
 }
 
+func initializeServer() {
+	createDataDirectory(viper.GetString("data_dir"))
+}
+
 func Run(configPath string) {
-	InitializeConfig(configPath)
+	initializeConfig(configPath)
+	initializeServer()
 
 	var wg sync.WaitGroup
 	_ = dqueue.GetInstance()

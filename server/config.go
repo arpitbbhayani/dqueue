@@ -12,7 +12,9 @@ import (
 
 const defaultConfig = `
 # port defines the port on which the Dqueue server should work on.
-# port: 4096
+port: 4096
+
+data_dir: /etc/dqueue/data
 `
 
 func createDefaultConfigFile(path string) {
@@ -31,7 +33,7 @@ func createDefaultConfigFile(path string) {
 	}
 }
 
-func InitializeConfig(path string) {
+func initializeConfig(path string) {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		logrus.Warnf("configuration file does not exists at %s. creating default config.", path)
 		createDefaultConfigFile(path)
@@ -47,6 +49,7 @@ func InitializeConfig(path string) {
 
 	// Default values to configurations
 	viper.SetDefault("port", 4096)
+	viper.SetDefault("data_dir", "/etc/dqueue/data")
 
 	err = viper.ReadConfig(bytes.NewReader(configBytes))
 	if err != nil {
