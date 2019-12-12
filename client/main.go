@@ -13,7 +13,7 @@ func initDqueueClient(protocol string) {
 	switch protocol {
 	case "http":
 		dqclient = DqueueHTTPClient{
-			URL: "http://localhost:4000",
+			URL: "http://localhost:4096",
 		}
 	default:
 		return

@@ -17,6 +17,7 @@ func Execute() error {
 }
 
 func init() {
+	serverCmd.Flags().String("config", "/etc/dqueue/config.yml", "configuration file")
 	rootCmd.AddCommand(serverCmd)
 
 	clientCmd.Flags().String("protocol", "http", "which protocol to be used for communication")

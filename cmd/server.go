@@ -9,6 +9,7 @@ var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "Run dqueue server",
 	Run: func(cmd *cobra.Command, args []string) {
-		server.Run()
+		configPath, _ := cmd.Flags().GetString("config")
+		server.Run(configPath)
 	},
 }

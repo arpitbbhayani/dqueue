@@ -1,12 +1,14 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"sync"
 
 	"github.com/arpitbbhayani/dqueue/dqueue"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 func runHttpServer(wg *sync.WaitGroup) {
@@ -17,13 +19,16 @@ func runHttpServer(wg *sync.WaitGroup) {
 	r.HandleFunc("/msg", MessagesHandler)
 	http.Handle("/", r)
 
-	logrus.Info("Dqueue started on port 4000")
-	if err := http.ListenAndServe(":4000", nil); err != nil {
+	port := viper.GetInt("port")
+	logrus.Infof("dqueue server started on port %d", port)
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil); err != nil {
 		panic(err)
 	}
 }
 
-func Run() {
+func Run(configPath string) {
+	InitializeConfig(configPath)
+
 	var wg sync.WaitGroup
 	_ = dqueue.GetInstance()
 
