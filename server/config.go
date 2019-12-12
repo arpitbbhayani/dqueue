@@ -35,7 +35,7 @@ func createDefaultConfigFile(path string) {
 
 func initializeConfig(path string) {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		logrus.Warnf("configuration file does not exists at %s. creating default config.", path)
+		logrus.Warnf("configuration file does not exists at %s hence creating default config", path)
 		createDefaultConfigFile(path)
 	}
 
@@ -55,6 +55,4 @@ func initializeConfig(path string) {
 	if err != nil {
 		logrus.Fatalf("unable to read configuration file: %s", path)
 	}
-
-	logrus.Infof("configuration read successful")
 }
