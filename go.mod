@@ -3,7 +3,7 @@ module github.com/arpitbbhayani/dqueue
 go 1.12
 
 require (
-	github.com/arpitbbhayani/cerr v0.0.0-20191202081933-1a0474e27a71
+	github.com/arpitbbhayani/cerr v0.0.0-20191205093633-2823446bcf0a
 	github.com/c-bata/go-prompt v0.2.3
 	github.com/gorilla/mux v1.7.3
 	github.com/mattn/go-tty v0.0.3 // indirect

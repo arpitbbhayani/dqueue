@@ -4,6 +4,8 @@ github.com/arpitbbhayani/cerr v0.0.0-20191202064335-827c20bd8ca4 h1:9npErlFUeqAr
 github.com/arpitbbhayani/cerr v0.0.0-20191202064335-827c20bd8ca4/go.mod h1:VNXrHgzOQ5Jjdw39mdfhZnqGSMoPKI3fhqK1Upz9Q98=
 github.com/arpitbbhayani/cerr v0.0.0-20191202081933-1a0474e27a71 h1:hMsrH5NzWVqaMTSgYmjhUUJkGpcyVwP6WStekqwBbws=
 github.com/arpitbbhayani/cerr v0.0.0-20191202081933-1a0474e27a71/go.mod h1:VNXrHgzOQ5Jjdw39mdfhZnqGSMoPKI3fhqK1Upz9Q98=
+github.com/arpitbbhayani/cerr v0.0.0-20191205093633-2823446bcf0a h1:GXg/SQDdusTm/WJNzAtUo7sPISfRxw8Txv70cwtD/2E=
+github.com/arpitbbhayani/cerr v0.0.0-20191205093633-2823446bcf0a/go.mod h1:VNXrHgzOQ5Jjdw39mdfhZnqGSMoPKI3fhqK1Upz9Q98=
 github.com/c-bata/go-prompt v0.2.3 h1:jjCS+QhG/sULBhAaBdjb2PlMRVaKXQgn+4yzaauvs2s=
 github.com/c-bata/go-prompt v0.2.3/go.mod h1:VzqtzE2ksDBcdln8G7mk2RX9QyGjH+OVqOCSiVIqS34=
 github.com/coreos/etcd v3.3.10+incompatible/go.mod h1:uF7uidLiAD3TWHmW31ZFd/JWoc32PjwdhPthX9715RE=

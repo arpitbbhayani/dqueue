@@ -19,7 +19,7 @@ func NewDqueueTransportError(err error, isTimeout bool, isRetryable bool) *Dqueu
 			SetOriginalError(err).
 			SetIsRetryable(isRetryable).
 			SetIsTimeout(isTimeout).
-			SetMessage("Unable to communicate with Dqueue server").
+			SetMessage("Unable to communicate with Dqueue server. Check if the server is up and running.").
 			Build(),
 	}
 }

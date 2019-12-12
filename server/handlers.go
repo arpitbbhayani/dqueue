@@ -8,6 +8,7 @@ import (
 
 	"github.com/arpitbbhayani/dqueue/dqueue"
 	"github.com/arpitbbhayani/dqueue/models"
+	"github.com/sirupsen/logrus"
 )
 
 func readHTTPRequestBody(reader io.Reader, obj interface{}) error {
@@ -49,26 +50,30 @@ func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 	case "PUT":
 		var request models.PutMessageRequest
 		if err := readHTTPRequestBody(r.Body, &request); err != nil {
-			panic(err)
+			logrus.Error(err)
+			return
 		}
 
 		dq := dqueue.GetInstance()
 		response := dq.PutMessage(&request)
 		if err := sendHTTPJSONResponse(response, http.StatusOK, w); err != nil {
-			panic(err)
+			logrus.Error(err)
+			return
 		}
 	case "GET":
 		var request models.GetMessageRequest
 		dq := dqueue.GetInstance()
 		response := dq.GetMessage(&request)
 		if err := sendHTTPJSONResponse(response, http.StatusOK, w); err != nil {
-			panic(err)
+			logrus.Error(err)
+			return
 		}
 	default:
 		if err := sendHTTPJSONResponse(models.HTTPError{
 			Message: "method not allowed",
 		}, http.StatusMethodNotAllowed, w); err != nil {
-			panic(err)
+			logrus.Error(err)
+			return
 		}
 	}
 }
