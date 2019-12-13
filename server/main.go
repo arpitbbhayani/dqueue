@@ -38,7 +38,7 @@ func Run(configPath string) {
 	_ = dqueue.GetInstance()
 
 	wg.Add(1)
-	runHttpServer(&wg)
+	go runHttpServer(&wg)
 
 	wg.Wait()
 }
