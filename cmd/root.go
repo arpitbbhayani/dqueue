@@ -21,5 +21,7 @@ func init() {
 	rootCmd.AddCommand(serverCmd)
 
 	clientCmd.Flags().String("protocol", "http", "which protocol to be used for communication")
+	clientCmd.Flags().String("host", "localhost", "dqueue server hostname or ip")
+	clientCmd.Flags().Int("port", 4096, "dqueue server port")
 	rootCmd.AddCommand(clientCmd)
 }
